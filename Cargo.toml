@@ -7,5 +7,8 @@ documentation = "https://docs.rs/collecting-hashmap"
 license = "MIT/Apache-2.0"
 readme = "README.md"
 homepage = "https://github.com/pwoolcoc/collecting-hashmap"
+description = """
+A hashmap that will store multiple values for a key
+"""
 
 [dependencies]
