@@ -120,11 +120,14 @@ impl<K, V, S> CollectingHashMap<K, V, S>
     ///
     /// If the key is already present, this will append the value to the key's `Vec<V>`
     pub fn insert(&mut self, k: K, v: V) {
-        if let Some(r) = self.store.get_mut(&k) {
-            r.push(v);
-        } else {
-            self.store.insert(k, vec![v]);
+        // this can go back to if-let-else once when we have nll
+        {
+            if let Some(r) = self.store.get_mut(&k) {
+                r.push(v);
+                return
+            }
         }
+        self.store.insert(k, vec![v]);
     }
 
     /// Retrieves a reference to a value for the given key
